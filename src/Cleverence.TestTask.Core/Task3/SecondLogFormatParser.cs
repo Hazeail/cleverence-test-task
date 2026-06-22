@@ -6,6 +6,7 @@
   22.06.2026 - Первичное создание файла.
   22.06.2026 - Добавлен архитектурный каркас парсера второго формата лога для задачи 3.
   22.06.2026 - Реализован разбор второго формата входной строки лога для задачи 3.
+  22.06.2026 - Уточнено извлечение сообщения второго формата без агрессивного удаления ведущих пробелов.
 */
 
 namespace Cleverence.TestTask.Core.Task3;
@@ -41,7 +42,7 @@ public sealed class SecondLogFormatParser : ILogLineParser
         string dateTimePart = parts[0].Trim();
         string levelPart = parts[1].Trim();
         string methodPart = parts[3].Trim();
-        string messagePart = parts[4].TrimStart();
+        string messagePart = ExtractMessagePart(parts[4]);
 
         if (dateTimePart.Length < 12)
         {
@@ -70,5 +71,22 @@ public sealed class SecondLogFormatParser : ILogLineParser
 
         record = new LogRecord(date, timePart, levelPart, methodPart, messagePart);
         return true;
+    }
+
+    /// <summary>
+    /// Извлекает текст сообщения из последнего поля второго формата.
+    /// </summary>
+    /// <param name="rawMessagePart">Сырое поле сообщения после разбиения строки по разделителю.</param>
+    /// <returns>Сообщение без служебного разделительного пробела после символа `|`.</returns>
+    /// <remarks>Удаляется только один разделительный пробел, если он стоит сразу после `|`, а не произвольное количество пробелов из начала сообщения.</remarks>
+    private static string ExtractMessagePart(string rawMessagePart)
+    {
+        if (rawMessagePart.Length == 0)
+        {
+            return string.Empty;
+        }
+
+        // Во втором формате после разделителя обычно стоит один технический пробел, который не относится к самому сообщению.
+        return rawMessagePart[0] == ' ' ? rawMessagePart[1..] : rawMessagePart;
     }
 }
