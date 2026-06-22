@@ -5,11 +5,12 @@
   ЖУРНАЛ ИЗМЕНЕНИЙ:
   22.06.2026 - Первичное создание файла.
   22.06.2026 - Добавлены round-trip тесты для рабочей реализации задачи 1.
+  22.06.2026 - Перенесен в структуру Task1 для явного разделения тестов по задачам.
 */
 
-using Cleverence.TestTask.Core.Compression;
+using Cleverence.TestTask.Core.Task1;
 
-namespace Cleverence.TestTask.Tests.Compression;
+namespace Cleverence.TestTask.Tests.Task1;
 
 /// <summary>
 /// Проверяет согласованность операций сжатия и декомпрессии как единого контракта.
