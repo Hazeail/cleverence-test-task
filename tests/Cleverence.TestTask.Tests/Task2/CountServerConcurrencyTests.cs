@@ -17,6 +17,7 @@ namespace Cleverence.TestTask.Tests.Task2;
 /// <summary>
 /// Содержит проверки параллельного чтения и эксклюзивной записи для сервера счетчика.
 /// </summary>
+[Collection(CountServerTestCollection.Name)]
 public sealed class CountServerConcurrencyTests
 {
     /// <summary>

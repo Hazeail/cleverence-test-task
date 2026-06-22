@@ -15,6 +15,7 @@ namespace Cleverence.TestTask.Tests.Task2;
 /// <summary>
 /// Содержит базовые проверки контракта сервера счетчика без сложных конкурентных сценариев.
 /// </summary>
+[Collection(CountServerTestCollection.Name)]
 public sealed class CountServerTests
 {
     /// <summary>
