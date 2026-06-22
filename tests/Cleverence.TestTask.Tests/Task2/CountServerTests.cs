@@ -5,6 +5,7 @@
   ЖУРНАЛ ИЗМЕНЕНИЙ:
   22.06.2026 - Первичное создание файла.
   22.06.2026 - Добавлена заготовка базовых тестов для архитектурного каркаса задачи 2.
+  22.06.2026 - Реализованы базовые тесты чтения и записи для задачи 2.
 */
 
 using Cleverence.TestTask.Core.Task2;
@@ -28,18 +29,27 @@ public sealed class CountServerTests
     /// <summary>
     /// Проверяет, что сервер умеет возвращать текущее значение счетчика.
     /// </summary>
-    [Fact(Skip = "Тест будет включен после реализации сервера задачи 2.")]
+    [Fact]
     public void GetCount_ShouldReturnCurrentValue()
     {
-        throw new NotImplementedException();
+        CountServer.AddToCount(7);
+
+        int result = CountServer.GetCount();
+
+        Assert.Equal(7, result);
     }
 
     /// <summary>
     /// Проверяет, что сервер корректно добавляет значение к счетчику.
     /// </summary>
-    [Fact(Skip = "Тест будет включен после реализации сервера задачи 2.")]
+    [Fact]
     public void AddToCount_ShouldIncreaseCounter()
     {
-        throw new NotImplementedException();
+        CountServer.AddToCount(3);
+        CountServer.AddToCount(4);
+
+        int result = CountServer.GetCount();
+
+        Assert.Equal(7, result);
     }
 }
